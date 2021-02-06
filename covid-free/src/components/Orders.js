@@ -7,14 +7,15 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import { tempObj, dateArr } from "./Deposits";
+import { tempObj } from "./Deposits";
 
 // Generate Order Data
-let i=0;
+// let i=0;
 const createData = (date, temp) => {
-  console.log(i);
-  i+=1;
-  console.log(temp);
+  // console.log(date);
+  // console.log(i);
+  // i+=1;
+  // console.log(temp);
   return {
     date: date,
     t0: temp[0],
@@ -37,7 +38,8 @@ let len = Object.keys(tempObj).length;
 let rows = [];
 let dates = Object.keys(tempObj);
 // console.log(dates);
-for (let i = Math.max(0, len - 7); i < Math.max(len,7); i++) {
+let start =  Math.max(0, len - 7);
+for (let i = Math.max(0, len - 7); i < start+Math.min(len,7); i++) {
   // console.log(dates[i]);
   let todayArr = tempObj[dates[i]];
   rows.push(createData(dates[i], todayArr));
@@ -91,7 +93,7 @@ export default function Orders() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Recent Temperatures</Title>
+      <Title>Recent Temperatures (°C)</Title>
       <Table size="small">
         <TableHead>
           <TableRow>

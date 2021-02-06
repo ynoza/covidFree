@@ -21,7 +21,8 @@ function createData(date, Temperature) {
 let len = Object.keys(tempObj).length;
 let averageTemp = [];
 let dates = Object.keys(tempObj);
-for (let i = Math.max(0, len - 7); i < Math.max(len,7); i++) {
+let start =  Math.max(0, len - 7);
+for (let i = Math.max(0, len - 7); i < start + Math.min(len,7); i++) {
   let todayArr = tempObj[dates[i]];
   const sum = todayArr.reduce((a, b) => a + b, 0);
   const avg = sum / todayArr.length || 0;
@@ -34,7 +35,7 @@ export default function AverageChart() {
 
   return (
     <React.Fragment>
-      <Title>Average Temperature by Date</Title>
+      <Title>Average Temperature by Day ({dates[start].slice(4)}-{dates[dates.length-1].slice(4)})</Title>
       <ResponsiveContainer>
         <LineChart
           data={averageTemp}
@@ -61,7 +62,7 @@ export default function AverageChart() {
             labelStyle={{ color: "black" }}
             itemStyle={{ color: "black" }}
             formatter={(value, name) => {
-              return `${value} °C`;
+              return `${value}°C`;
             }}
             labelFormatter={(value) => {
               return `Day: ${value}`;

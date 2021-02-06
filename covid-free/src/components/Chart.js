@@ -3,7 +3,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import Title from './Title';
 import { tempObj } from './Deposits';
-import { dateArr } from './Deposits';
+// import { dateArr } from './Deposits';
 // Generate Sales Data
 function createData(time, Temperature) {
   return { time, Temperature };
@@ -16,7 +16,8 @@ function createData(time, Temperature) {
 //   // data.push(createData(i,temperature[i]));
 // }
 // most recent day's temperature
-let temperature = tempObj[dateArr[dateArr.length - 1]];
+let keys =  Object.keys(tempObj);
+let temperature = tempObj[keys[keys.length - 1]];
 const data = [
   createData('1',temperature[0]),
   createData('2', temperature[1]),
@@ -35,7 +36,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>{keys[keys.length - 1]} (Today)</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -70,7 +71,7 @@ export default function Chart() {
             itemStyle={{ color: "black" }}
             formatter={(value, name) => {
                 
-              return `${value}`;
+              return `${value}°C`;
             }}
             labelFormatter={(value) => {
               return `Instance: ${value}`;
