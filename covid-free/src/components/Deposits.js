@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 export const dateArr = [
-  // "Fri Jan 29 2021",
+  "Fri Jan 29 2021",
   "Sat Jan 30 2021",
   "Sun Jan 31 2021",
   "Mon Feb 01 2021",
@@ -29,7 +29,7 @@ export const dateArr = [
 ];
 
 export const tempObj = {
-  // "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+  "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],

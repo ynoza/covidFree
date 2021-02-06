@@ -21,13 +21,13 @@ function createData(date, Temperature) {
 let len = Object.keys(tempObj).length;
 let averageTemp = [];
 let dates = Object.keys(tempObj);
-for (let i = Math.max(0, len - 7); i < Math.max(len-7+8,8); i++) {
+for (let i = Math.max(0, len - 7); i < Math.max(len,7); i++) {
   let todayArr = tempObj[dates[i]];
   const sum = todayArr.reduce((a, b) => a + b, 0);
   const avg = sum / todayArr.length || 0;
   averageTemp.push(createData(dates[i].slice(0, 4), avg));
 }
-averageTemp.shift();
+// if (Math.max(0, len - 7) ==0) averageTemp.shift();
 
 export default function AverageChart() {
   const theme = useTheme();

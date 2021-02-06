@@ -10,7 +10,11 @@ import Title from "./Title";
 import { tempObj, dateArr } from "./Deposits";
 
 // Generate Order Data
+let i=0;
 const createData = (date, temp) => {
+  console.log(i);
+  i+=1;
+  console.log(temp);
   return {
     date: date,
     t0: temp[0],
@@ -33,7 +37,7 @@ let len = Object.keys(tempObj).length;
 let rows = [];
 let dates = Object.keys(tempObj);
 // console.log(dates);
-for (let i = Math.max(0, len - 7); i < Math.max(len+1,8); i++) {
+for (let i = Math.max(0, len - 7); i < Math.max(len,7); i++) {
   // console.log(dates[i]);
   let todayArr = tempObj[dates[i]];
   rows.push(createData(dates[i], todayArr));
