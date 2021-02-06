@@ -14,12 +14,14 @@ let len = tempObj.length;
 let averageTemp = new Array(len);
 let dates = Object.keys(tempObj);
 for(let k of dates) {
+  // console.log(k);
     let todayArr = tempObj[k];
     const sum = todayArr.reduce((a, b) => a + b, 0);
     const avg = sum / todayArr.length || 0;
     averageTemp.push(createData(k.slice(0, 4), avg));
 }
-// console.log(averageTemp);
+averageTemp.shift();
+console.log(averageTemp);
 
 
 export default function AverageChart() {
