@@ -49,13 +49,13 @@ while True:
 		# 	u'time': current_time,
 		# 	u'user': USER_NAME
 		# })
-		doc_ref.update({
+		doc_ref.set({
 			current_time: {
 				u'temperature': temperature,
 				u'humidity': humidity,
 				u'user': USER_NAME
 			}
-		})
+		}, merge=True)
 	else:
 		GPIO.output(red_led, GPIO.HIGH)
 		print("Sensor failed")
