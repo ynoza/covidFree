@@ -6,7 +6,7 @@ import Adafruit_DHT
 import firebase_admin
 from firebase_admin import firestore, credentials
 
-USER_NAME = 'Adam'
+USER_NAME = 'Eve'
 
 DHT_SENSOR = Adafruit_DHT.DHT11
 DHT_PIN = 14
@@ -25,8 +25,8 @@ while True:
 	if temperature is not None:
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
-		# date_time = datetime.now()
-		date_time = datetime.now() + timedelta(days=1)
+		date_time = datetime.now()
+		# date_time = datetime.now() + timedelta(days=1)
 
 		current_date = date_time.strftime("%b %d, %Y")
 		current_time = date_time.strftime("%H:%M:%S")
