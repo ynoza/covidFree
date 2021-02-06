@@ -35,7 +35,7 @@ while True:
 		GPIO.output(green_led, GPIO.HIGH)
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
-		date_time = datetime.now()
+		# date_time = datetime.now()
 		date_time = datetime.now() + timedelta(days=1)
 
 		current_date = date_time.strftime("%b %d, %Y")
