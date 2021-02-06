@@ -9,9 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
 
 // Generate Order Data
-function createData(date, time) {
+const createData = (date, time) => {
   return {
-    date: date,
+    date: new Date().toString().slice("0", "15"),
     t0: time[0],
     t1: time[1],
     t2: time[2],
@@ -23,16 +23,32 @@ function createData(date, time) {
     t8: time[8],
     t9: time[9],
   };
-}
+};
+const temperature = [24, 24, 24, 24, 24, 24, 24, 24, 24, 24];
 
 const rows = [
-  createData("16 Mar, 2019", [24, 24, 24, 24, 24, 24, 24, 24, 24, 24]),
+  createData(`${new Date()}`, temperature),
   // createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
   // createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
   // createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
   // createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
   // createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
 ];
+
+const tempLabels = [
+  "T1",
+  "T2",
+  "T3",
+  "T4",
+  "T5",
+  "T6",
+  "T7",
+  "T8",
+  "T9",
+  "T10",
+];
+
+console.log(rows);
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -55,16 +71,9 @@ export default function Orders() {
             <TableCell style={{ fontWeight: "bold" }} align="left">
               Date
             </TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T1</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T2</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T3</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T4</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T5</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T6</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T7</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T8</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T9</TableCell>
-            <TableCell style={{ fontWeight: "bold" }}>T10</TableCell>
+            {tempLabels.map((tempLabel) => (
+              <TableCell style={{ fontWeight: "bold" }}>{tempLabel}</TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
