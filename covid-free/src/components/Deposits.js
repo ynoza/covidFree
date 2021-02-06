@@ -17,6 +17,7 @@ const useStyles = makeStyles({
   }
 });
 export const dateArr = [
+  "Sat Jan 30 2021",
   "Sun Jan 31 2021",
   "Mon Feb 01 2021",
   "Tues Feb 02 2021",
@@ -27,13 +28,14 @@ export const dateArr = [
 ];
 
 export const tempObj = {
+  "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
   "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
   "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
   "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
   "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-  "Sat Feb 06 2021": [25, 21, 25, 25, 25, 25, 25, 25, 25, 29],
+  "Sat Feb 06 2021": [24, 21, 24, 20, 24, 28, 24, 21, 18, 21],
 };
 
 const averageTemp = (dateArr, tempObj) => {
@@ -42,7 +44,7 @@ const averageTemp = (dateArr, tempObj) => {
   let combinedArr = todayArr.concat(yesterdayArr);
   const sum = combinedArr.reduce((a, b) => a + b, 0);
   const avg = sum / combinedArr.length || 0;
-  return avg;
+  return avg.toFixed(1);
 };
 
 export default function Deposits() {

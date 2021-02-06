@@ -103,7 +103,7 @@ export default function Orders() {
               <TableCell align="center">{row.t7}</TableCell>
               <TableCell align="center">{row.t8}</TableCell>
               <TableCell align="center">{row.t9}</TableCell>
-              <TableCell align="right">{avg_val}</TableCell>
+              <TableCell align="right">{avg_val.toFixed(1)}</TableCell>
               <TableCell align="right">{min_val}</TableCell>
               <TableCell align="right">{max_val}</TableCell>
             </TableRow>
