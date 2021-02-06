@@ -36,7 +36,7 @@ while True:
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
 		date_time = datetime.now()
-		# date_time = datetime.now() + timedelta(days=1)
+		date_time = datetime.now() + timedelta(days=1)
 
 		current_date = date_time.strftime("%b %d, %Y")
 		current_time = date_time.strftime("%H:%M:%S")
