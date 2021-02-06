@@ -6,6 +6,8 @@ import Adafruit_DHT
 import firebase_admin
 from firebase_admin import firestore, credentials
 
+USER_NAME = 'Adam'
+
 DHT_SENSOR = Adafruit_DHT.DHT11
 DHT_PIN = 14
 
@@ -23,12 +25,16 @@ while True:
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
 		date_time = datetime.now()
+		current_date = date_time.strftime("%b %d, %Y")
+		current_time = date_time.strftime("%H:%M:%S")
 
-		doc_ref = db.collection(u'test').document(u'testdate')
-		doc_ref.set({
+		doc_ref = db.collection(USER_NAME).document(current_date)
+		day_ref = db.collection(u'times').document(current_time)
+		day_ref.set({
 			u'temperature': temperature,
 			u'humidity': humidity,
-			u'time': date_time
+			u'time': current_time,
+			u'user': USER_NAME
 		})
 	else:
 		print("Sensor failed")
