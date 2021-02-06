@@ -29,7 +29,7 @@ while True:
 		current_time = date_time.strftime("%H:%M:%S")
 
 		doc_ref = db.collection(USER_NAME).document(current_date)
-		day_ref = db.collection(u'times').document(current_time)
+		day_ref = doc_ref.collection(u'times').document(current_time)
 		day_ref.set({
 			u'temperature': temperature,
 			u'humidity': humidity,
