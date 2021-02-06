@@ -2,7 +2,8 @@ import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
-import { temperature } from './Orders';
+import { tempObj } from './Deposits';
+import { dateArr } from './Deposits';
 // Generate Sales Data
 function createData(time, amount) {
   return { time, amount };
@@ -14,7 +15,8 @@ function createData(time, amount) {
 //   data.push(createData('1',5));
 //   // data.push(createData(i,temperature[i]));
 // }
-
+// most recent day's temperature
+let temperature = tempObj[dateArr[dateArr.length - 1]];
 const data = [
   createData('1',temperature[0]),
   createData('2', temperature[1]),
@@ -40,11 +42,20 @@ export default function Chart() {
           margin={{
             top: 16,
             right: 16,
-            bottom: 0,
+            bottom: 20,
             left: 24,
           }}
         >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <XAxis dataKey="time" stroke={theme.palette.text.secondary}>
+          <Label
+              // angle={270}
+              dy={20}
+              position="middle"
+              style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
+            >
+              Time Instance (10 min span)
+            </Label>
+          </XAxis>
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
               angle={270}
@@ -54,7 +65,7 @@ export default function Chart() {
               Tempeature (°C)
             </Label>
           </YAxis>
-          <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
+          <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={true} />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>

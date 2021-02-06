@@ -7,24 +7,26 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
+import { tempObj, dateArr} from './Deposits';
+
 
 // Generate Order Data
-const createData = (date, time) => {
+const createData = (date, temp) => {
   return {
     date: new Date().toString().slice("0", "15"),
-    t0: time[0],
-    t1: time[1],
-    t2: time[2],
-    t3: time[3],
-    t4: time[4],
-    t5: time[5],
-    t6: time[6],
-    t7: time[7],
-    t8: time[8],
-    t9: time[9],
+    t0: temp[0],
+    t1: temp[1],
+    t2: temp[2],
+    t3: temp[3],
+    t4: temp[4],
+    t5: temp[5],
+    t6: temp[6],
+    t7: temp[7],
+    t8: temp[8],
+    t9: temp[9],
   };
 };
-export const temperature = [25, 25, 25, 25, 25, 25, 25, 25, 25, 25];
+let temperature = tempObj[dateArr[dateArr.length - 1]];
 
 const rows = [
   createData(`${new Date()}`, temperature),
@@ -34,6 +36,10 @@ const rows = [
   // createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
   // createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
 ];
+const min_val = Math.min(...temperature);
+const max_val = Math.max(...temperature);
+const sum = temperature.reduce((a, b) => a + b, 0);
+const avg_val = sum / temperature.length || 0;
 
 const tempLabels = [
   "T1",
@@ -47,8 +53,6 @@ const tempLabels = [
   "T9",
   "T10",
 ];
-
-console.log(rows);
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -69,29 +73,42 @@ export default function Orders() {
         <TableHead>
           <TableRow>
             <TableCell style={{ fontWeight: "bold" }} align="left">
-              Date
+              Time Instance
             </TableCell>
             {tempLabels.map((tempLabel) => (
-              <TableCell style={{ fontWeight: "bold" }}>{tempLabel}</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}  align="center">{tempLabel}</TableCell>
             ))}
+            <TableCell style={{ fontWeight: "bold" }} align="right" >
+              Average
+            </TableCell>
+            <TableCell style={{ fontWeight: "bold" }} align="right" >
+              Low
+            </TableCell>
+            <TableCell style={{ fontWeight: "bold" }} align="right">
+              High
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.date}>
               <TableCell align="left">{row.date}</TableCell>
-              <TableCell>{row.t0}</TableCell>
-              <TableCell>{row.t1}</TableCell>
-              <TableCell>{row.t2}</TableCell>
-              <TableCell>{row.t3}</TableCell>
-              <TableCell>{row.t4}</TableCell>
-              <TableCell>{row.t5}</TableCell>
-              <TableCell>{row.t6}</TableCell>
-              <TableCell>{row.t7}</TableCell>
-              <TableCell>{row.t8}</TableCell>
-              <TableCell>{row.t9}</TableCell>
+              <TableCell align="center">{row.t0}</TableCell>
+              <TableCell align="center">{row.t1}</TableCell>
+              <TableCell align="center">{row.t2}</TableCell>
+              <TableCell align="center">{row.t3}</TableCell>
+              <TableCell align="center">{row.t4}</TableCell>
+              <TableCell align="center">{row.t5}</TableCell>
+              <TableCell align="center">{row.t6}</TableCell>
+              <TableCell align="center">{row.t7}</TableCell>
+              <TableCell align="center">{row.t8}</TableCell>
+              <TableCell align="center">{row.t9}</TableCell>
+              <TableCell align="right">{avg_val}</TableCell>
+              <TableCell align="right">{min_val}</TableCell>
+              <TableCell align="right">{max_val}</TableCell>
             </TableRow>
-          ))}
+              ))}
+          
         </TableBody>
       </Table>
       {/* <div className={classes.seeMore}> */}

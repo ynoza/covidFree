@@ -12,8 +12,11 @@ const useStyles = makeStyles({
   depositContext: {
     flex: 1,
   },
+  center: {
+    margin: 'auto',
+  }
 });
-const dateArr = [
+export const dateArr = [
   "Sun Jan 31 2021",
   "Mon Feb 01 2021",
   "Tues Feb 02 2021",
@@ -23,16 +26,16 @@ const dateArr = [
   "Sat Feb 06 2021",
 ];
 
-const tempObj = {
+export const tempObj = {
   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
   "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
   "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
   "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
   "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-  "Sat Feb 06 2021": [25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
+  "Sat Feb 06 2021": [25, 21, 25, 25, 25, 25, 25, 25, 25, 29],
 };
-console.log(Object.keys(tempObj));
+
 const averageTemp = (dateArr, tempObj) => {
   let todayArr = tempObj[dateArr[dateArr.length - 1]];
   let yesterdayArr = tempObj[dateArr[dateArr.length - 2]];
@@ -46,17 +49,19 @@ export default function Deposits() {
   const classes = useStyles();
   return (
     <React.Fragment>
+      <div class={classes.center}>
       <Title>Average Temperature</Title>
-      <Typography component="p" variant="h4">
+      <Typography component="p" variant="h4" >
         {averageTemp(dateArr, tempObj)} °C
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        {dateArr[dateArr.length - 1]}
+        {`${dateArr[dateArr.length - 2]} - ${dateArr[dateArr.length - 1]}`}
       </Typography>
       <div>
         {/* <Link color="primary" href="#" onClick={preventDefault}>
           View balance
         </Link> */}
+      </div>
       </div>
     </React.Fragment>
   );

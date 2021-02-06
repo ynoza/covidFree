@@ -22,6 +22,7 @@ import { mainListItems, secondaryListItems } from "./ListItem";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import AverageChart from "./AverageChart"
 
 function Copyright() {
   return (
@@ -153,7 +154,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            covidFree
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={69} color="secondary">
@@ -193,6 +194,12 @@ export default function Dashboard() {
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
+              </Paper>
+            </Grid>
+            {/* AverageChart */}
+            <Grid item xs={12} md={8} lg={12}> 
+              <Paper className={fixedHeightPaper}>
+                <AverageChart />
               </Paper>
             </Grid>
             {/* Recent Orders */}
