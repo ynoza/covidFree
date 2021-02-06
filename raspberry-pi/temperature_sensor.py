@@ -33,5 +33,6 @@ while True:
 	else:
 		print("Sensor failed")
 	
+	sleep(5)
 	GPIO.output(7, GPIO.LOW)
-	sleep(30)
+	sleep(25)
