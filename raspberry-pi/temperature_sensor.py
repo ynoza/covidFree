@@ -17,7 +17,7 @@ while True:
 	if temperature is not None:
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
-		date_time = date_time.now()
+		date_time = datetime.now()
 
 		doc_ref = db.collection(u'test').document(u'testdate')
 		doc_ref.set({
