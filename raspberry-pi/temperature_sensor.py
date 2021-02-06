@@ -1,5 +1,5 @@
 from time import sleep
-from datetime import datetime
+from datetime import datetime, timedelta
 import RPi.GPIO as GPIO
 
 import Adafruit_DHT
@@ -11,6 +11,7 @@ USER_NAME = 'Adam'
 DHT_SENSOR = Adafruit_DHT.DHT11
 DHT_PIN = 14
 
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW)
 
@@ -24,7 +25,9 @@ while True:
 	if temperature is not None:
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
-		date_time = datetime.now()
+		# date_time = datetime.now()
+		date_time = datetime.now() + timedelta(days=1)
+
 		current_date = date_time.strftime("%b %d, %Y")
 		current_time = date_time.strftime("%H:%M:%S")
 
