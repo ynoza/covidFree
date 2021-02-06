@@ -154,7 +154,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            covidFree
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={69} color="secondary">
@@ -196,16 +196,16 @@ export default function Dashboard() {
                 <Deposits />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
             {/* AverageChart */}
             <Grid item xs={12} md={8} lg={12}> 
               <Paper className={fixedHeightPaper}>
                 <AverageChart />
+              </Paper>
+            </Grid>
+            {/* Recent Orders */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Orders />
               </Paper>
             </Grid>
           </Grid>

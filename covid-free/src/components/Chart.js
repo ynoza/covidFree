@@ -15,7 +15,7 @@ function createData(time, amount) {
 //   data.push(createData('1',5));
 //   // data.push(createData(i,temperature[i]));
 // }
-
+// most recent day's temperature
 let temperature = tempObj[dateArr[dateArr.length - 1]];
 const data = [
   createData('1',temperature[0]),
@@ -53,7 +53,7 @@ export default function Chart() {
               position="middle"
               style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
             >
-              Time Instance
+              Time Instance (10 min span)
             </Label>
           </XAxis>
           <YAxis stroke={theme.palette.text.secondary}>

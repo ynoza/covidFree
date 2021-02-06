@@ -13,36 +13,14 @@ function createData(date, amount) {
 let len = tempObj.length;
 let averageTemp = new Array(len);
 let dates = Object.keys(tempObj);
-for(let k of dates){
-  let todayArr = tempObj[k];
-  const sum = todayArr.reduce((a, b) => a + b, 0);
-  const avg = sum / todayArr.length || 0;
-  averageTemp.push(createData(k, avg));
+for(let k of dates) {
+    let todayArr = tempObj[k];
+    const sum = todayArr.reduce((a, b) => a + b, 0);
+    const avg = sum / todayArr.length || 0;
+    averageTemp.push(createData(k.slice(0, 4), avg));
 }
+// console.log(averageTemp);
 
-
-
-// for(let i=0;i<len;i++){
-//   averageTemp.push(createData(tempObj[], ));
-//   // data.push(createData(i,temperature[i]));
-// }
-
-const data = [
-  createData('1',temperature[0]),
-  createData('2', temperature[1]),
-  createData('3', temperature[2]),
-  createData('4', temperature[3]),
-  createData('5', temperature[4]),
-  createData('6', temperature[5]),
-  createData('7', temperature[6]),
-  createData('8', temperature[7]),
-  createData('9', temperature[8]),
-  createData('10', temperature[9]),
-];
-console.log(data);
-function formatXAxis(tickItem) {
-  return moment(tickItem).format('MMM Do YYYY')
-  }
 
 export default function AverageChart() {
   const theme = useTheme();
@@ -56,11 +34,17 @@ export default function AverageChart() {
           margin={{
             top: 16,
             right: 16,
-            bottom: 0,
+            bottom: 20,
             left: 24,
           }}
         >
-          <XAxis dataKey="data" tickFormatter={formatXAxis} stroke={theme.palette.text.secondary} />
+          <XAxis 
+           dataKey={'date'}
+           stroke={theme.palette.text.secondary}>
+            <Label dy={20}>
+             Day
+            </Label>
+          </XAxis>
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
               angle={270}

@@ -33,9 +33,9 @@ export const tempObj = {
   "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
   "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
   "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-  "Sat Feb 06 2021": [25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
+  "Sat Feb 06 2021": [25, 21, 25, 25, 25, 25, 25, 25, 25, 29],
 };
-console.log(Object.keys(tempObj));
+
 const averageTemp = (dateArr, tempObj) => {
   let todayArr = tempObj[dateArr[dateArr.length - 1]];
   let yesterdayArr = tempObj[dateArr[dateArr.length - 2]];
