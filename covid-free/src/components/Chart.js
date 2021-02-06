@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import Title from './Title';
 import { tempObj } from './Deposits';
 import { dateArr } from './Deposits';
 // Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
+function createData(time, Temperature) {
+  return { time, Temperature };
 }
 
 // var len = 10;
@@ -65,7 +65,18 @@ export default function Chart() {
               Tempeature (°C)
             </Label>
           </YAxis>
-          <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={true} />
+          <Tooltip
+            labelStyle={{ color: "black" }}
+            itemStyle={{ color: "black" }}
+            formatter={(value, name) => {
+                
+              return `${value}`;
+            }}
+            labelFormatter={(value) => {
+              return `Instance: ${value}`;
+            }}
+          />
+          <Line type="monotone" dataKey="Temperature" stroke={theme.palette.primary.main} dot={true} />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>
