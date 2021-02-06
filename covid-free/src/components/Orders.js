@@ -7,13 +7,12 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import { tempObj, dateArr} from './Deposits';
-
+import { tempObj, dateArr } from "./Deposits";
 
 // Generate Order Data
 const createData = (date, temp) => {
   return {
-    date: new Date().toString().slice("0", "15"),
+    date: date,
     t0: temp[0],
     t1: temp[1],
     t2: temp[2],
@@ -24,22 +23,39 @@ const createData = (date, temp) => {
     t7: temp[7],
     t8: temp[8],
     t9: temp[9],
+    avg_val: temp.reduce((a, b) => a + b, 0) / temp.length || 0,
+    min_val: Math.min(...temp),
+    max_val: Math.max(...temp),
   };
 };
-let temperature = tempObj[dateArr[dateArr.length - 1]];
 
-const rows = [
-  createData(`${new Date()}`, temperature),
-  // createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-  // createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-  // createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  // createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-  // createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-];
-const min_val = Math.min(...temperature);
-const max_val = Math.max(...temperature);
-const sum = temperature.reduce((a, b) => a + b, 0);
-const avg_val = sum / temperature.length || 0;
+let len = Object.keys(tempObj).length;
+let rows = [];
+let dates = Object.keys(tempObj);
+// console.log(dates);
+for (let i = Math.max(0, len - 7); i < Math.max(len+1,8); i++) {
+  // console.log(dates[i]);
+  let todayArr = tempObj[dates[i]];
+  rows.push(createData(dates[i], todayArr));
+}
+
+// let temperature = tempObj[dateArr[dateArr.length - 1]];
+
+// const rows = [
+//   createData(`${new Date()}`, temperature),
+// createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
+// createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
+// createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
+// createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
+// createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
+// ];
+// const min_val = Math.min(...temperature);
+// const max_val = Math.max(...temperature);
+// const sum = (arr) => {
+//     arr.reduce((a, b) => a + b, 0);
+// }
+// const sum =
+// const avg_val = sum / temperature.length || 0;
 
 const tempLabels = [
   "T1",
@@ -52,6 +68,9 @@ const tempLabels = [
   "T8",
   "T9",
   "T10",
+  "Average",
+  "Low",
+  "High",
 ];
 
 // function preventDefault(event) {
@@ -76,17 +95,19 @@ export default function Orders() {
               Time Instance
             </TableCell>
             {tempLabels.map((tempLabel) => (
-              <TableCell style={{ fontWeight: "bold" }}  align="center">{tempLabel}</TableCell>
+              <TableCell style={{ fontWeight: "bold" }} align="center">
+                {tempLabel}
+              </TableCell>
             ))}
-            <TableCell style={{ fontWeight: "bold" }} align="right" >
+            {/* <TableCell style={{ fontWeight: "bold" }} align="right">
               Average
             </TableCell>
-            <TableCell style={{ fontWeight: "bold" }} align="right" >
+            <TableCell style={{ fontWeight: "bold" }} align="right">
               Low
             </TableCell>
             <TableCell style={{ fontWeight: "bold" }} align="right">
               High
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -103,12 +124,11 @@ export default function Orders() {
               <TableCell align="center">{row.t7}</TableCell>
               <TableCell align="center">{row.t8}</TableCell>
               <TableCell align="center">{row.t9}</TableCell>
-              <TableCell align="right">{avg_val.toFixed(1)}</TableCell>
-              <TableCell align="right">{min_val}</TableCell>
-              <TableCell align="right">{max_val}</TableCell>
+              <TableCell align="right">{row.avg_val.toFixed(1)}</TableCell>
+              <TableCell align="right">{row.min_val}</TableCell>
+              <TableCell align="right">{row.max_val}</TableCell>
             </TableRow>
-              ))}
-          
+          ))}
         </TableBody>
       </Table>
       {/* <div className={classes.seeMore}> */}

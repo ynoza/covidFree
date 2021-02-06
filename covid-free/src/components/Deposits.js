@@ -13,10 +13,11 @@ const useStyles = makeStyles({
     flex: 1,
   },
   center: {
-    margin: 'auto',
-  }
+    margin: "auto",
+  },
 });
 export const dateArr = [
+  // "Fri Jan 29 2021",
   "Sat Jan 30 2021",
   "Sun Jan 31 2021",
   "Mon Feb 01 2021",
@@ -28,6 +29,7 @@ export const dateArr = [
 ];
 
 export const tempObj = {
+  // "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
@@ -35,7 +37,7 @@ export const tempObj = {
   "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
   "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
   "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-  "Sat Feb 06 2021": [24, 21, 24, 20, 24, 28, 24, 21, 18, 21],
+  "Sat Feb 06 2021": [24, 21, 24, 2, 24, 28, 24, 21, 18, 21],
 };
 
 const averageTemp = (dateArr, tempObj) => {
@@ -52,18 +54,18 @@ export default function Deposits() {
   return (
     <React.Fragment>
       <div class={classes.center}>
-      <Title>Average Temperature</Title>
-      <Typography component="p" variant="h4" >
-        {averageTemp(dateArr, tempObj)} °C
-      </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
-        {`${dateArr[dateArr.length - 2]} - ${dateArr[dateArr.length - 1]}`}
-      </Typography>
-      <div>
-        {/* <Link color="primary" href="#" onClick={preventDefault}>
+        <Title>Average Temperature</Title>
+        <Typography component="p" variant="h4">
+          {averageTemp(dateArr, tempObj)} °C
+        </Typography>
+        <Typography color="textSecondary" className={classes.depositContext}>
+          {`${dateArr[dateArr.length - 2]} - ${dateArr[dateArr.length - 1]}`}
+        </Typography>
+        <div>
+          {/* <Link color="primary" href="#" onClick={preventDefault}>
           View balance
         </Link> */}
-      </div>
+        </div>
       </div>
     </React.Fragment>
   );
