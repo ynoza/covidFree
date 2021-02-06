@@ -22,7 +22,7 @@ while True:
 		doc_ref = db.collection(u'test').document(u'testdate')
 		doc_ref.set({
 			u'temperature': temperature,
-			u'humidity': humidity
+			u'humidity': humidity,
 			u'time': date_time
 		})
 	else:
