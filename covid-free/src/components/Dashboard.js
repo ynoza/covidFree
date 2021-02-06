@@ -16,13 +16,14 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./ListItem";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import AverageChart from "./AverageChart"
+import { Icon } from "@material-ui/core";
 
 function Copyright() {
   return (
@@ -135,6 +136,9 @@ export default function Dashboard() {
         className={clsx(classes.appBar, true && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
+          <Icon >
+            <LocalHospitalIcon />
+          </Icon>
           <IconButton
             edge="start"
             color="inherit"
