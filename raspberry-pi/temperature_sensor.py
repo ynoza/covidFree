@@ -7,7 +7,7 @@ import firebase_admin
 from firebase_admin import firestore, credentials
 
 # Global Variables and initial setup
-USER_NAME = 'Eve'
+USER_NAME = 'TEST'
 
 DHT_SENSOR = Adafruit_DHT.DHT11
 DHT_PIN = 14
@@ -35,19 +35,26 @@ while True:
 		GPIO.output(green_led, GPIO.HIGH)
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
-		# date_time = datetime.now()
-		date_time = datetime.now() + timedelta(days=1)
+		date_time = datetime.now()
+		# date_time = datetime.now() + timedelta(days=1)
 
 		current_date = date_time.strftime("%b %d, %Y")
 		current_time = date_time.strftime("%H:%M:%S")
 
 		doc_ref = db.collection(USER_NAME).document(current_date)
-		day_ref = doc_ref.collection(u'times').document(current_time)
-		day_ref.set({
-			u'temperature': temperature,
-			u'humidity': humidity,
-			u'time': current_time,
-			u'user': USER_NAME
+		# day_ref = doc_ref.collection(u'times').document(current_time)
+		# day_ref.set({
+		# 	u'temperature': temperature,
+		# 	u'humidity': humidity,
+		# 	u'time': current_time,
+		# 	u'user': USER_NAME
+		# })
+		doc_ref.update({
+			current_time: {
+				u'temperature': temperature,
+				u'humidity': humidity,
+				u'user': USER_NAME
+			}
 		})
 	else:
 		GPIO.output(red_led, GPIO.HIGH)
