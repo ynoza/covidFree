@@ -22,6 +22,7 @@ import { mainListItems, secondaryListItems } from "./ListItem";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import AverageChart from "./AverageChart"
 
 function Copyright() {
   return (
@@ -199,6 +200,12 @@ export default function Dashboard() {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />
+              </Paper>
+            </Grid>
+            {/* AverageChart */}
+            <Grid item xs={12} md={8} lg={12}> 
+              <Paper className={fixedHeightPaper}>
+                <AverageChart />
               </Paper>
             </Grid>
           </Grid>

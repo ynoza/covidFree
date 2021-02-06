@@ -12,8 +12,11 @@ const useStyles = makeStyles({
   depositContext: {
     flex: 1,
   },
+  center: {
+    margin: 'auto',
+  }
 });
-const dateArr = [
+export const dateArr = [
   "Sun Jan 31 2021",
   "Mon Feb 01 2021",
   "Tues Feb 02 2021",
@@ -23,7 +26,7 @@ const dateArr = [
   "Sat Feb 06 2021",
 ];
 
-const tempObj = {
+export const tempObj = {
   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
   "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
@@ -46,17 +49,19 @@ export default function Deposits() {
   const classes = useStyles();
   return (
     <React.Fragment>
+      <div class={classes.center}>
       <Title>Average Temperature</Title>
-      <Typography component="p" variant="h4">
+      <Typography component="p" variant="h4" >
         {averageTemp(dateArr, tempObj)} °C
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        {dateArr[dateArr.length - 1]}
+        {`${dateArr[dateArr.length - 2]} - ${dateArr[dateArr.length - 1]}`}
       </Typography>
       <div>
         {/* <Link color="primary" href="#" onClick={preventDefault}>
           View balance
         </Link> */}
+      </div>
       </div>
     </React.Fragment>
   );

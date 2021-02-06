@@ -1,22 +1,32 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import moment from 'moment';
 import Title from './Title';
+import { temperature } from './Orders';
 import { tempObj } from './Deposits';
-import { dateArr } from './Deposits';
 // Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
+function createData(date, amount) {
+  return { date, amount };
 }
 
-// var len = 10;
-// var data = new Array(len);
-// for(var i=0;i<len;i++){
-//   data.push(createData('1',5));
+let len = tempObj.length;
+let averageTemp = new Array(len);
+let dates = Object.keys(tempObj);
+for(let k of dates){
+  let todayArr = tempObj[k];
+  const sum = todayArr.reduce((a, b) => a + b, 0);
+  const avg = sum / todayArr.length || 0;
+  averageTemp.push(createData(k, avg));
+}
+
+
+
+// for(let i=0;i<len;i++){
+//   averageTemp.push(createData(tempObj[], ));
 //   // data.push(createData(i,temperature[i]));
 // }
 
-let temperature = tempObj[dateArr[dateArr.length - 1]];
 const data = [
   createData('1',temperature[0]),
   createData('2', temperature[1]),
@@ -29,33 +39,28 @@ const data = [
   createData('9', temperature[8]),
   createData('10', temperature[9]),
 ];
+console.log(data);
+function formatXAxis(tickItem) {
+  return moment(tickItem).format('MMM Do YYYY')
+  }
 
-export default function Chart() {
+export default function AverageChart() {
   const theme = useTheme();
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Average Temperature by Date</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={averageTemp}
           margin={{
             top: 16,
             right: 16,
-            bottom: 20,
+            bottom: 0,
             left: 24,
           }}
         >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary}>
-          <Label
-              // angle={270}
-              dy={20}
-              position="middle"
-              style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
-            >
-              Time Instance
-            </Label>
-          </XAxis>
+          <XAxis dataKey="data" tickFormatter={formatXAxis} stroke={theme.palette.text.secondary} />
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
               angle={270}
