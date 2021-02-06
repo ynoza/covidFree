@@ -24,7 +24,7 @@ const createData = (date, time) => {
     t9: time[9],
   };
 };
-const temperature = [24, 24, 24, 24, 24, 24, 24, 24, 24, 24];
+export const temperature = [25, 25, 25, 25, 25, 25, 25, 25, 25, 25];
 
 const rows = [
   createData(`${new Date()}`, temperature),
