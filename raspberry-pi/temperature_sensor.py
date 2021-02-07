@@ -57,7 +57,7 @@ while True:
 	else:
 		GPIO.output(red_led, GPIO.HIGH)
 		print("Sensor failed")
-	
+
 	sleep(2)
 	turn_all_LED_off(led_list)
 	sleep(3)
