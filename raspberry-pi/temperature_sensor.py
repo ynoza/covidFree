@@ -7,7 +7,7 @@ import firebase_admin
 from firebase_admin import firestore, credentials
 
 # Global Variables and initial setup
-USER_NAME = 'Steve'
+USER_NAME = 'Jane'
 
 DHT_SENSOR = Adafruit_DHT.DHT11
 DHT_PIN = 14
@@ -29,14 +29,15 @@ def turn_all_LED_off(led_list: list):
 	for i in led_list:
 		GPIO.output(i, GPIO.LOW)
 
-while True:
+counter = 0
+while counter < 10:
 	humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
 	if temperature is not None:
 		GPIO.output(green_led, GPIO.HIGH)
 		print(f"Temp = {temperature}, Hum = {humidity}")
 
-		date_time = datetime.now()
-		# date_time = datetime.now() + timedelta(days=1)
+		# date_time = datetime.now()
+		date_time = datetime.now() - timedelta(days=7)
 
 		current_date = date_time.strftime("%a %b %d, %Y")
 		current_time = date_time.strftime("%H:%M:%S")
@@ -61,10 +62,11 @@ while True:
 		# 	u'time': current_time,
 		# 	u'user': USER_NAME
 		# })
+		counter += 1
 	else:
 		GPIO.output(red_led, GPIO.HIGH)
 		print("Sensor failed")
 	
 	sleep(5)
 	turn_all_LED_off(led_list)
-	sleep(25)
+	sleep(5)
