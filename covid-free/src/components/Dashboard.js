@@ -25,6 +25,7 @@ import Orders from "./Orders";
 import AverageChart from "./AverageChart";
 import { Icon } from "@material-ui/core";
 import db from "../firebase";
+import SimpleMenu from "./SimpleMenu";
 
 function Copyright() {
   return (
@@ -157,19 +158,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-  const [user, setUser] = React.useState('Jane');
+  const [user, setUser] = React.useState(null);
   const [tempObj, setTempObj] = React.useState({});
-  useEffect (async () => {
-    let collection = await getCollection(user);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    let _user = "Jane";
+    if (localStorage.getItem("user")) {
+      _user = localStorage.getItem("user");
+    }
+    let collection = await getCollection(_user);
     setTempObj(collection);
-  },[])  
+    setUser(_user);
+  }, [user]);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
+
+  const handleUserChange = (user) => {
+    setUser(user);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -184,6 +192,7 @@ export default function Dashboard() {
           <Icon>
             <LocalHospitalIcon />
           </Icon>
+          <SimpleMenu handleUserChange={handleUserChange} />
           <IconButton
             edge="start"
             color="inherit"
@@ -233,36 +242,34 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {Object.keys(tempObj).length > 0 &&
-            (
-            <>
-              <Grid item xs={12} md={8} lg={9}>
-                { /* Chart */ }
-                <Paper className={fixedHeightPaper}>
-                  <Chart tempObj={tempObj} />
-                </Paper>
-              </Grid>
-              { /* Recent Deposits */ }
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper className={fixedHeightPaper}>
-                  <Deposits tempObj={tempObj} />
-                </Paper>
-              </Grid>
-              { /* AverageChart */ }
-              <Grid item xs={12} md={8} lg={12}>
-                <Paper className={fixedHeightPaper}>
-                  <AverageChart tempObj={tempObj} />
-                </Paper>
-              </Grid>
-              { /* Recent Orders */ }
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Orders tempObj={tempObj} />
-                </Paper>
-              </Grid>
-            </>
-            )
-            }
+            {Object.keys(tempObj).length > 0 && (
+              <>
+                <Grid item xs={12} md={8} lg={9}>
+                  {/* Chart */}
+                  <Paper className={fixedHeightPaper}>
+                    <Chart tempObj={tempObj} />
+                  </Paper>
+                </Grid>
+                {/* Recent Deposits */}
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper className={fixedHeightPaper}>
+                    <Deposits tempObj={tempObj} />
+                  </Paper>
+                </Grid>
+                {/* AverageChart */}
+                <Grid item xs={12} md={8} lg={12}>
+                  <Paper className={fixedHeightPaper}>
+                    <AverageChart tempObj={tempObj} />
+                  </Paper>
+                </Grid>
+                {/* Recent Orders */}
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Orders tempObj={tempObj} />
+                  </Paper>
+                </Grid>
+              </>
+            )}
           </Grid>
           <Box pt={4}>
             <Copyright />
