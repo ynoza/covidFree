@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import { tempObj } from "./Deposits";
+import { tempObj } from "./Dashboard";
 
 // Generate Order Data
 // let i=0;
@@ -33,17 +33,6 @@ const createData = (date, temp) => {
     max_val: Math.max(...temp),
   };
 };
-
-let len = Object.keys(tempObj).length;
-let rows = [];
-let dates = Object.keys(tempObj);
-// console.log(dates);
-let start =  Math.max(0, len - 7);
-for (let i = Math.max(0, len - 7); i < start+Math.min(len,7); i++) {
-  // console.log(dates[i]);
-  let todayArr = tempObj[dates[i]];
-  rows.push(createData(dates[i], todayArr));
-}
 
 // let temperature = tempObj[dateArr[dateArr.length - 1]];
 
@@ -91,6 +80,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Orders() {
   const classes = useStyles();
+  let len = Object.keys(tempObj).length;
+  let rows = [];
+  let dates = Object.keys(tempObj);
+  // console.log(dates);
+  let start = Math.max(0, len - 7);
+  for (let i = Math.max(0, len - 7); i < start + Math.min(len, 7); i++) {
+    // console.log(dates[i]);
+    let todayArr = tempObj[dates[i]];
+    rows.push(createData(dates[i], todayArr));
+  }
   return (
     <React.Fragment>
       <Title>Recent Temperatures (°C)</Title>

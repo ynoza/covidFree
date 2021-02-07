@@ -12,30 +12,32 @@ import {
 import moment from "moment";
 import Title from "./Title";
 import { temperature } from "./Orders";
-import { tempObj } from "./Deposits";
+import { tempObj } from "./Dashboard";
 // Generate Sales Data
 function createData(date, Temperature) {
   return { date, Temperature };
 }
 
-let len = Object.keys(tempObj).length;
-let averageTemp = [];
-let dates = Object.keys(tempObj);
-let start =  Math.max(0, len - 7);
-for (let i = Math.max(0, len - 7); i < start + Math.min(len,7); i++) {
-  let todayArr = tempObj[dates[i]];
-  const sum = todayArr.reduce((a, b) => a + b, 0);
-  const avg = sum / todayArr.length || 0;
-  averageTemp.push(createData(dates[i].slice(0, 4), avg));
-}
 // if (Math.max(0, len - 7) ==0) averageTemp.shift();
 
 export default function AverageChart() {
   const theme = useTheme();
-
+  let len = Object.keys(tempObj).length;
+  let averageTemp = [];
+  let dates = Object.keys(tempObj);
+  let start = Math.max(0, len - 7);
+  for (let i = Math.max(0, len - 7); i < start + Math.min(len, 7); i++) {
+    let todayArr = tempObj[dates[i]];
+    const sum = todayArr.reduce((a, b) => a + b, 0);
+    const avg = sum / todayArr.length || 0;
+    averageTemp.push(createData(dates[i].slice(0, 4), avg));
+  }
   return (
     <React.Fragment>
-      <Title>Average Temperature by Day ({dates[start].slice(4)}-{dates[dates.length-1].slice(4)})</Title>
+      <Title>
+        Average Temperature by Day ({dates[start].slice(4)}-
+        {dates[dates.length - 1].slice(4)})
+      </Title>
       <ResponsiveContainer>
         <LineChart
           data={averageTemp}
