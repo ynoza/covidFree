@@ -1,4 +1,4 @@
-# Welcome to [covidFree](https://nobodyinthis.space)
+# Welcome to [covidFree](https://nocovidinthis.space)
 ## Inspiration
 
 The COVID-19 pandemic and the constant apprehension of contracting the virus. Many people's jobs have a very strong physical element to it, and so, have a higher risk of contracting COVID-19 in their day to day lives.
@@ -27,6 +27,8 @@ Hopefully, nothing, because that means the end of the pandemic! 🙃
 ## Try it out!
 
 https://covidfree-c4429.web.app/
+
+https://nocovidinthis.space/
 
 
 [Devpost](https://devpost.com/software/covidfree-2021)
