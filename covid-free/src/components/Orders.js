@@ -7,15 +7,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import { tempObj } from "./Deposits";
+import { tempObj } from "./Dashboard";
 
-// Generate Order Data
-// let i=0;
 const createData = (date, temp) => {
-  // console.log(date);
-  // console.log(i);
-  // i+=1;
-  // console.log(temp);
   return {
     date: date,
     t0: temp[0],
@@ -34,35 +28,6 @@ const createData = (date, temp) => {
   };
 };
 
-let len = Object.keys(tempObj).length;
-let rows = [];
-let dates = Object.keys(tempObj);
-// console.log(dates);
-let start =  Math.max(0, len - 7);
-for (let i = Math.max(0, len - 7); i < start+Math.min(len,7); i++) {
-  // console.log(dates[i]);
-  let todayArr = tempObj[dates[i]];
-  rows.push(createData(dates[i], todayArr));
-}
-
-// let temperature = tempObj[dateArr[dateArr.length - 1]];
-
-// const rows = [
-//   createData(`${new Date()}`, temperature),
-// createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-// createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-// createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-// createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-// createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-// ];
-// const min_val = Math.min(...temperature);
-// const max_val = Math.max(...temperature);
-// const sum = (arr) => {
-//     arr.reduce((a, b) => a + b, 0);
-// }
-// const sum =
-// const avg_val = sum / temperature.length || 0;
-
 const tempLabels = [
   "T1",
   "T2",
@@ -79,10 +44,6 @@ const tempLabels = [
   "High",
 ];
 
-// function preventDefault(event) {
-//   event.preventDefault();
-// }
-
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
@@ -91,6 +52,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Orders() {
   const classes = useStyles();
+  let len = Object.keys(tempObj).length;
+  let rows = [];
+  let dates = Object.keys(tempObj);
+  // console.log(dates);
+  let start = Math.max(0, len - 7);
+  for (let i = Math.max(0, len - 7); i < start + Math.min(len, 7); i++) {
+    // console.log(dates[i]);
+    let todayArr = tempObj[dates[i]];
+    rows.push(createData(dates[i], todayArr));
+  }
   return (
     <React.Fragment>
       <Title>Recent Temperatures (°C)</Title>
@@ -105,15 +76,7 @@ export default function Orders() {
                 {tempLabel}
               </TableCell>
             ))}
-            {/* <TableCell style={{ fontWeight: "bold" }} align="right">
-              Average
-            </TableCell>
-            <TableCell style={{ fontWeight: "bold" }} align="right">
-              Low
-            </TableCell>
-            <TableCell style={{ fontWeight: "bold" }} align="right">
-              High
-            </TableCell> */}
+            {}
           </TableRow>
         </TableHead>
         <TableBody>

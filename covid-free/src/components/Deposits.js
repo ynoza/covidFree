@@ -3,6 +3,7 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
+import { tempObj } from "./Dashboard";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -16,32 +17,10 @@ const useStyles = makeStyles({
     margin: "auto",
   },
 });
-// export const dateArr = [
-//   "Fri Jan 29 2021",
-//   "Sat Jan 30 2021",
-//   "Sun Jan 31 2021",
-//   "Mon Feb 01 2021",
-//   "Tues Feb 02 2021",
-//   "Wed Feb 03 2021",
-//   "Thurs Feb 04 2021",
-//   "Fri Feb 05 2021",
-//   "Sat Feb 06 2021",
-// ];
 
-export const tempObj = {
-  // "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-  // "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-  "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-  "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
-  "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
-  // "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
-  // "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
-  // "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-  // "Sat Feb 06 2021": [24, 21, 24, 2, 24, 28, 24, 21, 18, 21],
-};
 
 const averageTemp = (tempObj) => {
-  let keys =  Object.keys(tempObj);
+  let keys = Object.keys(tempObj);
   let todayArr = tempObj[keys[keys.length - 1]];
   let yesterdayArr = tempObj[keys[keys.length - 2]];
   let combinedArr = todayArr.concat(yesterdayArr);
@@ -52,7 +31,7 @@ const averageTemp = (tempObj) => {
 
 export default function Deposits() {
   const classes = useStyles();
-  let keys =  Object.keys(tempObj);
+  let keys = Object.keys(tempObj);
   return (
     <React.Fragment>
       <div class={classes.center}>
@@ -61,7 +40,9 @@ export default function Deposits() {
           {averageTemp(tempObj)}°C
         </Typography>
         <Typography color="textSecondary" className={classes.depositContext}>
-          {`${keys[keys.length - 2].slice(4)} - ${keys[keys.length - 1].slice(4)}`}
+          {`${keys[keys.length - 2].slice(4)} - ${keys[keys.length - 1].slice(
+            4
+          )}`}
         </Typography>
         <div>
           {/* <Link color="primary" href="#" onClick={preventDefault}>

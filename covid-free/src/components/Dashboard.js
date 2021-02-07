@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,15 +16,15 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
-import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./ListItem";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
-import AverageChart from "./AverageChart"
+import AverageChart from "./AverageChart";
 import { Icon } from "@material-ui/core";
-import db from '../firebase';
+import db from "../firebase";
 
 function Copyright() {
   return (
@@ -37,7 +37,34 @@ function Copyright() {
   );
 }
 
+export let user = "Jane";
 // const drawerWidth = 240;
+
+export let tempObj = {};
+const getCollection = async (user) => {
+  // date should be: Month Day, year (i.e. Feb 06, 2021)
+  const docRef = db.collection(user).doc("date");
+  const doc = await docRef.get();
+  if (!doc.exists) {
+    console.log("No such document!");
+  } else {
+    let result = doc.data();
+    let days = Object.keys(result);
+    days.sort(function (a, b) {
+      return new Date(a) - new Date(b);
+    });
+    // console.log(days);
+    days.forEach((day) => {
+      let times = [];
+      let t = Object.keys(result[day]);
+      t.forEach((time) => {
+        times.push(result[day][time].temperature);
+      });
+      tempObj[day] = times;
+    });
+    console.log(tempObj);
+  }
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -118,27 +145,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-const getCollection = async (user, date) => {
-  // date should be: Month Day, year (i.e. Feb 06, 2021)
-  const docRef = db.collection(user).doc(date);
-  const doc = await docRef.get();
-  if (!doc.exists) {
-    console.log('No such document!');
-  } else {
-    // data processing
-    console.log('Document data:', doc.data());
-    let times = doc.data();
-    // iterating through each document
-    for (let time in times) {
-      console.log(time)
-    }
-  }
-}
-// example usage for John
-getCollection('John', 'Feb 06, 2021');
-
 export default function Dashboard() {
+  getCollection(user);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -157,7 +165,7 @@ export default function Dashboard() {
         className={clsx(classes.appBar, true && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
-          <Icon >
+          <Icon>
             <LocalHospitalIcon />
           </Icon>
           <IconButton
@@ -222,7 +230,7 @@ export default function Dashboard() {
               </Paper>
             </Grid>
             {/* AverageChart */}
-            <Grid item xs={12} md={8} lg={12}> 
+            <Grid item xs={12} md={8} lg={12}>
               <Paper className={fixedHeightPaper}>
                 <AverageChart />
               </Paper>
