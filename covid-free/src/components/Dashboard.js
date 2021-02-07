@@ -135,7 +135,7 @@ const getCollection = async (user, date) => {
     }
   }
 }
-
+// example usage for John
 getCollection('John', 'Feb 06, 2021');
 
 export default function Dashboard() {
