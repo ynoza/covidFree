@@ -27,5 +27,3 @@ Hopefully, nothing, because that means the end of the pandemic! 🙃
 ## Try it out!
 
 https://covidfree-c4429.web.app/
-https://github.com/ynoza/covidFree
-https://nocovidinthis.space/
