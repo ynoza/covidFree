@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import {
   LineChart,
@@ -26,6 +26,7 @@ function createData(time, Temperature) {
 // most recent day's temperature
 
 export default function Chart() {
+  useEffect(() => {}, [tempObj]);
   const theme = useTheme();
   let keys = Object.keys(tempObj);
   let temperature = tempObj[keys[keys.length - 1]];

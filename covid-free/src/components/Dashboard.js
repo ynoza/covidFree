@@ -48,13 +48,8 @@ const getCollection = async (user) => {
   if (!doc.exists) {
     console.log("No such document!");
   } else {
-    // data processing
-    // console.log("Document data:", doc.data());
     let result = doc.data();
-    // console.log("result:", result);
-    // console.log("Day:", result["Mon Feb 01, 2021"]);
     let days = Object.keys(result);
-    // console.log(days);
     days.sort(function (a, b) {
       return new Date(a) - new Date(b);
     });
@@ -67,23 +62,9 @@ const getCollection = async (user) => {
       });
       tempObj[day] = times;
     });
-
     console.log(tempObj);
   }
 };
-getCollection(user);
-
-// export const tempObj = {
-//   // "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-//   // "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-//   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-//   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
-//   "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
-//   "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
-//   "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
-//   "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-//   "Sat Feb 06 2021": [24, 21, 24, 2, 24, 28, 24, 21, 18, 21],
-// };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -165,6 +146,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+  getCollection(user);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
