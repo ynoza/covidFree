@@ -37,12 +37,11 @@ function Copyright() {
   );
 }
 
-export let user = "Jane";
 // const drawerWidth = 240;
 
-export let tempObj = {};
 const getCollection = async (user) => {
   // date should be: Month Day, year (i.e. Feb 06, 2021)
+  let tempObj = {};
   const docRef = db.collection(user).doc("date");
   const doc = await docRef.get();
   if (!doc.exists) {
@@ -64,7 +63,19 @@ const getCollection = async (user) => {
     });
     console.log(tempObj);
   }
+  return tempObj;
 };
+// export const tempObj = {
+//   // "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+//   // "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+//   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+//   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+//   "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
+//   // "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
+//   // "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
+//   // "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
+//   // "Sat Feb 06 2021": [24, 21, 24, 2, 24, 28, 24, 21, 18, 21],
+// };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -146,7 +157,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-  getCollection(user);
+  const [user, setUser] = React.useState('Jane');
+  const [tempObj, setTempObj] = React.useState({});
+  useEffect (async () => {
+    let collection = await getCollection(user);
+    setTempObj(collection);
+  },[])  
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -217,30 +233,36 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* AverageChart */}
-            <Grid item xs={12} md={8} lg={12}>
-              <Paper className={fixedHeightPaper}>
-                <AverageChart />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
+            {Object.keys(tempObj).length > 0 &&
+            (
+            <>
+              <Grid item xs={12} md={8} lg={9}>
+                { /* Chart */ }
+                <Paper className={fixedHeightPaper}>
+                  <Chart tempObj={tempObj} />
+                </Paper>
+              </Grid>
+              { /* Recent Deposits */ }
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  <Deposits tempObj={tempObj} />
+                </Paper>
+              </Grid>
+              { /* AverageChart */ }
+              <Grid item xs={12} md={8} lg={12}>
+                <Paper className={fixedHeightPaper}>
+                  <AverageChart tempObj={tempObj} />
+                </Paper>
+              </Grid>
+              { /* Recent Orders */ }
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                  <Orders tempObj={tempObj} />
+                </Paper>
+              </Grid>
+            </>
+            )
+            }
           </Grid>
           <Box pt={4}>
             <Copyright />

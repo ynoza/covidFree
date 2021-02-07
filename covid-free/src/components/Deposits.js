@@ -3,7 +3,7 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
-import { tempObj } from "./Dashboard";
+// import { tempObj } from "./Dashboard";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -29,7 +29,7 @@ const averageTemp = (tempObj) => {
   return avg.toFixed(1);
 };
 
-export default function Deposits() {
+export default function Deposits( {tempObj} ) {
   const classes = useStyles();
   let keys = Object.keys(tempObj);
   return (

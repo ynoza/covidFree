@@ -12,7 +12,7 @@ import {
 import moment from "moment";
 import Title from "./Title";
 import { temperature } from "./Orders";
-import { tempObj } from "./Dashboard";
+// import { tempObj } from "./Dashboard";
 // Generate Sales Data
 function createData(date, Temperature) {
   return { date, Temperature };
@@ -20,7 +20,7 @@ function createData(date, Temperature) {
 
 // if (Math.max(0, len - 7) ==0) averageTemp.shift();
 
-export default function AverageChart() {
+export default function AverageChart( {tempObj} ) {
   const theme = useTheme();
   let len = Object.keys(tempObj).length;
   let averageTemp = [];

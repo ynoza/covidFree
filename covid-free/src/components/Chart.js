@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from "recharts";
 import Title from "./Title";
-import { tempObj } from "./Dashboard";
+// import { tempObj } from "./Dashboard";
 // import { dateArr } from './Deposits';
 // Generate Sales Data
 function createData(time, Temperature) {
@@ -25,8 +25,9 @@ function createData(time, Temperature) {
 // }
 // most recent day's temperature
 
-export default function Chart() {
-  useEffect(() => {}, [tempObj]);
+export default function Chart( {tempObj} ) {
+  // useEffect(() => {}, [tempObj]);
+  console.log(tempObj)
   const theme = useTheme();
   let keys = Object.keys(tempObj);
   let temperature = tempObj[keys[keys.length - 1]];
