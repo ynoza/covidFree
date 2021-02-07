@@ -26,9 +26,8 @@ Hopefully, nothing, because that means the end of the pandemic! 🙃
 
 ## Try it out!
 
-https://covidfree-c4429.web.app/
-
 https://nocovidinthis.space/
 
-
 [Devpost](https://devpost.com/software/covidfree-2021)
+
+https://covidfree-c4429.web.app/
