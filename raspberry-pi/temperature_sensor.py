@@ -7,7 +7,7 @@ import firebase_admin
 from firebase_admin import firestore, credentials
 
 # Global Variables and initial setup
-USER_NAME = 'John'
+USER_NAME = 'Steve'
 
 DHT_SENSOR = Adafruit_DHT.DHT11
 DHT_PIN = 14
@@ -38,16 +38,18 @@ while True:
 		date_time = datetime.now()
 		# date_time = datetime.now() + timedelta(days=1)
 
-		current_date = date_time.strftime("%b %d, %Y")
+		current_date = date_time.strftime("%a %b %d, %Y")
 		current_time = date_time.strftime("%H:%M:%S")
 
-		doc_ref = db.collection(USER_NAME).document(current_date)
+		doc_ref = db.collection(USER_NAME).document(u'date')
 		doc_ref.set({
-			current_time: {
-				u'temperature': temperature,
-				u'humidity': humidity,
-				u'user': USER_NAME,
-				u'datetime': date_time
+			current_date: {
+				current_time: {
+					u'temperature': temperature,
+					u'humidity': humidity,
+					u'user': USER_NAME,
+					u'datetime': date_time
+				}
 			}
 		}, merge=True)
 		
