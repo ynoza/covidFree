@@ -24,6 +24,7 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import AverageChart from "./AverageChart"
 import { Icon } from "@material-ui/core";
+import db from '../firebase';
 
 function Copyright() {
   return (
@@ -116,6 +117,26 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
 }));
+
+
+const getCollection = async (user, date) => {
+  // date should be: Month Day, year (i.e. Feb 06, 2021)
+  const docRef = db.collection(user).doc(date);
+  const doc = await docRef.get();
+  if (!doc.exists) {
+    console.log('No such document!');
+  } else {
+    // data processing
+    console.log('Document data:', doc.data());
+    let times = doc.data();
+    // iterating through each document
+    for (let time in times) {
+      console.log(time)
+    }
+  }
+}
+
+getCollection('John', 'Feb 06, 2021');
 
 export default function Dashboard() {
   const classes = useStyles();
