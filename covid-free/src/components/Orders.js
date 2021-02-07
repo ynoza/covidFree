@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
-import { tempObj } from "./Dashboard";
+// import { tempObj } from "./Dashboard";
 
 const createData = (date, temp) => {
   return {
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+export default function Orders( {tempObj} ) {
   const classes = useStyles();
   let len = Object.keys(tempObj).length;
   let rows = [];
