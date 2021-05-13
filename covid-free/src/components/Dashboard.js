@@ -40,43 +40,77 @@ function Copyright() {
 
 // const drawerWidth = 240;
 
-const getCollection = async (user) => {
-  // date should be: Month Day, year (i.e. Feb 06, 2021)
-  let tempObj = {};
-  const docRef = db.collection(user).doc("date");
-  const doc = await docRef.get();
-  if (!doc.exists) {
-    console.log("No such document!");
-  } else {
-    let result = doc.data();
-    let days = Object.keys(result);
-    days.sort(function (a, b) {
-      return new Date(a) - new Date(b);
-    });
-    // console.log(days);
-    days.forEach((day) => {
-      let times = [];
-      let t = Object.keys(result[day]);
-      t.forEach((time) => {
-        times.push(result[day][time].temperature);
-      });
-      tempObj[day] = times;
-    });
-    console.log(tempObj);
-  }
-  return tempObj;
-};
-// export const tempObj = {
-//   // "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-//   // "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-//   "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
-//   "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
-//   "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
-//   // "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
-//   // "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
-//   // "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
-//   // "Sat Feb 06 2021": [24, 21, 24, 2, 24, 28, 24, 21, 18, 21],
+
+// Firebase storage trial has been complete, so although this functionality works perfectly fine, for economical reasons the data will be hardcoded for the UI
+// const getCollection = async (user) => {
+//   // date should be: Month Day, year (i.e. Feb 06, 2021)
+//   let tempObj = {};
+//   const docRef = db.collection(user).doc("date");
+//   const doc = await docRef.get();
+//   if (!doc.exists) {
+//     console.log("No such document!");
+//   } else {
+//     let result = doc.data();
+//     let days = Object.keys(result);
+//     days.sort(function (a, b) {
+//       return new Date(a) - new Date(b);
+//     });
+//     // console.log(days);
+//     days.forEach((day) => {
+//       let times = [];
+//       let t = Object.keys(result[day]);
+//       t.forEach((time) => {
+//         times.push(result[day][time].temperature);
+//       });
+//       tempObj[day] = times;
+//     });
+//     console.log(tempObj);
+//   }
+//   return tempObj;
 // };
+
+const getCollection = async (user) => {
+  let index = 2;
+  if (user === "Jane") index = 0;
+  else if (user === "Alex") index=1;
+  const tempObj = [
+    {
+    "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+    "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+    "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+    "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+    "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
+    "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
+    "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
+    "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
+    "Sat Feb 06 2021": [24, 21, 24, 2, 24, 28, 24, 21, 18, 21],
+  },
+  {
+    "Fri Jan 29 2021": [20, 21, 23, 25, 22, 21, 21, 21, 21, 21],
+    "Sat Jan 30 2021": [19, 19, 19, 19, 22, 19, 19, 19, 19, 19],
+    "Sun Jan 31 2021": [19, 18, 19, 19, 19, 19, 19, 20, 19, 19],
+    "Mon Feb 01 2021": [20, 21, 20, 21, 20, 20, 20, 20, 20, 20],
+    "Tues Feb 02 2021": [21, 21, 20, 21, 21, 21, 21, 21, 20, 21],
+    "Wed Feb 03 2021": [22, 24, 22, 23, 22, 26, 22, 27, 22, 22],
+    "Thurs Feb 04 2021": [23, 21, 23, 22, 23, 23, 24, 23, 23, 23],
+    "Fri Feb 05 2021": [24, 25, 24, 24, 25, 24, 24, 26, 24, 24],
+    "Sat Feb 06 2021": [10, 21, 7, 9, 10, 11, 15, 25, 26, 21],
+  },
+  {
+    "Fri Jan 29 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+    "Sat Jan 30 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+    "Sun Jan 31 2021": [19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+    "Mon Feb 01 2021": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+    "Tues Feb 02 2021": [21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
+    "Wed Feb 03 2021": [22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
+    "Thurs Feb 04 2021": [23, 23, 23, 23, 23, 23, 23, 23, 23, 23],
+    "Fri Feb 05 2021": [24, 24, 24, 24, 24, 24, 24, 24, 24, 24],
+    "Sat Feb 06 2021": [22, 24, 22, 23, 22, 26, 22, 27, 22, 22],
+  }
+]
+
+  return tempObj[index];
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -215,7 +249,7 @@ export default function Dashboard() {
             covidFree
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={69} color="secondary">
+            <Badge color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>

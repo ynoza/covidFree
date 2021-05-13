@@ -46,7 +46,7 @@ export default function Chart( {tempObj} ) {
 
   return (
     <React.Fragment>
-      <Title>{keys[keys.length - 1]} (Today)</Title>
+      <Title>{keys[keys.length - 1]} (Latest)</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
